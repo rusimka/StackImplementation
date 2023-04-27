@@ -25,11 +25,11 @@ public class LinkedStack<E> implements StackInterface<E> {
       throw new StackIsAlreadyFullException();
     }
     // to add the new Node on the top of the stack
-    top = new Node<>(data,top);
+    top = new Node<>(data, top);
 
-//    Node<E> newNode = new Node<>(data);
-//    newNode.next = top;
-//    top = newNode;
+    //    Node<E> newNode = new Node<>(data);
+    //    newNode.next = top;
+    //    top = newNode;
     size++;
   }
 
@@ -46,27 +46,37 @@ public class LinkedStack<E> implements StackInterface<E> {
 
   @Override
   public synchronized E peek() {
-    if(top == null){
+    if (top == null) {
       throw new NoSuchElementException();
     }
     return top.data;
   }
 
   @Override
-  public void growSizeStack(int size) {}
+  public synchronized void growSizeStack(int size) {
+    maxSize += size;
+    System.out.println("maximum size of the stack: " + maxSize);
+  }
 
   @Override
-  public int getStackSize() {
-    return 0;
+  public synchronized int getStackSize() {
+    int size = 0;
+    Node<E> current = top;
+    while (current != null) {
+      size++;
+      current = current.next;
+    }
+    return size;
+
   }
 
   @Override
   public int getStackMaximumSize() {
-    return 0;
+    return maxSize;
   }
 
   @Override
-  public boolean isFull() {
+  public synchronized boolean isFull() {
     return size == maxSize;
   }
 

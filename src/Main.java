@@ -16,5 +16,7 @@ public class Main {
     stack.pop();
     System.out.println(stack);
     System.out.println("Peek the first element: " + stack.peek());
+    stack.growSizeStack(6);
+    System.out.println(stack.getStackSize());
     }
 }
