@@ -10,13 +10,14 @@ public class Stack<E> implements StackInterface<E> {
 
   // 'top' is the index of the element that's on the top of the stack
   private int top;
-  private final E[] stackArray;
+  private  E[] stackArray;
 
   public Stack(int maxSize) {
     this.maxSize = maxSize;
     stackArray = (E[]) new Object[maxSize];
     top = -1;
   }
+
 
   @Override
   public synchronized void push(E element) {
@@ -47,15 +48,16 @@ public class Stack<E> implements StackInterface<E> {
 
   @Override
   public synchronized void growSizeStack(int size) {
-    E[] newStackArray = (E[]) new Object[maxSize + size];
     maxSize += size;
+    E[] newStackArray = (E[]) new Object[maxSize];
   }
 
 
   // function to get how many elements are added into the stack
   @Override
   public synchronized int getStackSize() {
-    return top + 1;
+    return stackArray.length;
+
   }
 
   @Override

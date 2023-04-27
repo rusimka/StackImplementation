@@ -1,5 +1,7 @@
 package stack;
 
+import stack.exceptions.NotAllowedSize;
+
 public interface StackInterface<E> {
 
     public void push(E element);
@@ -8,7 +10,7 @@ public interface StackInterface<E> {
 
     public E peek();
 
-    public void growSizeStack(int size);
+    public void growSizeStack(int size) throws NotAllowedSize;
 
     public int getStackSize();
 

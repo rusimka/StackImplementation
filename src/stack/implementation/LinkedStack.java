@@ -2,6 +2,8 @@ package stack.implementation;
 
 import stack.Node;
 import stack.StackInterface;
+import stack.exceptions.NegativeNumberException;
+import stack.exceptions.NotAllowedSize;
 import stack.exceptions.StackIsAlreadyEmptyException;
 import stack.exceptions.StackIsAlreadyFullException;
 
@@ -12,6 +14,8 @@ public class LinkedStack<E> implements StackInterface<E> {
   private Node<E> top;
   private int size;
   private int maxSize;
+
+  private final int MAX_SIZE_INTEGER = 2147483647;
 
   // creating an empty stack
   public LinkedStack(int maxSize) {
@@ -46,14 +50,23 @@ public class LinkedStack<E> implements StackInterface<E> {
 
   @Override
   public synchronized E peek() {
-    if (top == null) {
-      throw new NoSuchElementException();
+    if (isEmpty()) {
+      throw new StackIsAlreadyEmptyException();
     }
     return top.data;
   }
 
   @Override
-  public synchronized void growSizeStack(int size) {
+  public synchronized void growSizeStack(int size) throws NotAllowedSize {
+    if (size < 0) {
+      throw new NegativeNumberException(size);
+    }
+    if (size > MAX_SIZE_INTEGER) {
+      throw new NotAllowedSize(size);
+    }
+    if (maxSize + size > MAX_SIZE_INTEGER || maxSize + size < 0) {
+      throw new NotAllowedSize(size);
+    }
     maxSize += size;
     System.out.println("maximum size of the stack: " + maxSize);
   }
@@ -67,7 +80,6 @@ public class LinkedStack<E> implements StackInterface<E> {
       current = current.next;
     }
     return size;
-
   }
 
   @Override

@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import stack.exceptions.NotAllowedSize;
 import stack.implementation.LinkedStack;
+import stack.implementation.Stack;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -73,9 +75,9 @@ public class StackImplementationTests {
   }
 
   @Test
-  public void testGrowSizeStack() {
+  public void testGrowSizeStack() throws NotAllowedSize {
     LinkedStack stack = new LinkedStack(5);
-    stack.growSizeStack(6);
+    stack.growSizeStack(2147483645);
     assertEquals(11, stack.getStackMaximumSize());
   }
 
@@ -84,6 +86,13 @@ public class StackImplementationTests {
     LinkedStack stack = new LinkedStack(5);
     stack.push(1);
     assertEquals(1, stack.getStackSize());
+  }
+
+  @Test
+  public void testArrayStackSize(){
+    Stack stack = new Stack(5);
+    stack.push(1);
+    assertEquals(1,stack.getStackSize());
   }
 
   @Test
