@@ -1,8 +1,10 @@
 package stack.tests;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import stack.implementation.LinkedStack;
-import stack.implementation.Stack;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,11 +26,50 @@ public class StackImplementationTests {
     //        assertEquals(6,stack.pop());
   }
 
+  @ParameterizedTest
+  @ValueSource(ints = {1, 2})
+  public void pushPopParametrizedTest(int number) {
+    LinkedStack stack = new LinkedStack(5);
+    stack.push(number);
+    assertEquals(2,stack.pop());
+  }
+
+  @ParameterizedTest
+  @CsvSource({
+          "1, 2, 3",
+  })
+  void testPushAndPopParametrizedTest2(int a, int b, int c) {
+    LinkedStack stack = new LinkedStack(3);
+    // Push the values onto the stack
+    stack.push(a);
+    stack.push(b);
+    stack.push(c);
+    // Pop the values from the stack and check that they are correct
+    assertEquals(c, stack.pop());
+    assertEquals(b, stack.pop());
+    assertEquals(a, stack.pop());
+    // Check that the stack is now empty
+    assertTrue(stack.isEmpty());
+  }
+
+
   @Test
   public void peekTest() {
     LinkedStack stack = new LinkedStack(5);
     stack.push(1);
-    assertEquals(1, 1);
+    assertEquals(1, stack.peek());
+  }
+
+  @ParameterizedTest
+  @ValueSource(ints = {1, 2, 3, 4, 5})
+  void testPeekParametrized(int value) {
+    LinkedStack stack = new LinkedStack(5);
+    // Push the value onto the stack
+    stack.push(value);
+    // Peek at the top value and check that it is correct
+    assertEquals(value, stack.peek());
+    // Check that the stack size has not changed
+    assertEquals(1, stack.getStackSize());
   }
 
   @Test
@@ -54,17 +95,17 @@ public class StackImplementationTests {
     assertFalse(stack.isFull()); // PASSED TEST
 
     /* Test Case 2: Assertion that the stack is full */
-//     assertTrue(stack.isFull()); // FAILED
+    //     assertTrue(stack.isFull()); // FAILED
 
     /* Test Case 3: Assertion that the stack is full when the stack is filled with all elements */
-            stack.push(2);
-            stack.push(3);
-            stack.push(4);
-            stack.push(5);
-//            assertTrue(stack.isFull()); // PASSED
+    stack.push(2);
+    stack.push(3);
+    stack.push(4);
+    stack.push(5);
+    //            assertTrue(stack.isFull()); // PASSED
 
     /* Test Case 4: Assertion that the stack is not full when is filled with all elements*/
-//            assertFalse(stack.isFull()); // FAILED
+    //            assertFalse(stack.isFull()); // FAILED
   }
 
   @Test
