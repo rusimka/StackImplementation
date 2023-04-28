@@ -14,7 +14,7 @@ public class StackImplementationTests {
 
   @Test
   public void pushPopTest() {
-    LinkedStack stack = new LinkedStack(5);
+    LinkedStack<Integer> stack = new LinkedStack(5);
     stack.push(1);
     stack.push(2);
     stack.push(3);
@@ -57,7 +57,7 @@ public class StackImplementationTests {
 
   @Test
   public void peekTest() {
-    LinkedStack stack = new LinkedStack(5);
+    LinkedStack<Integer> stack = new LinkedStack(5);
     stack.push(1);
     assertEquals(1, stack.peek());
   }
@@ -65,7 +65,7 @@ public class StackImplementationTests {
   @ParameterizedTest
   @ValueSource(ints = {1, 2, 3, 4, 5})
   void testPeekParametrized(int value) {
-    LinkedStack stack = new LinkedStack(5);
+    LinkedStack<Integer> stack = new LinkedStack<>(5);
     // Push the value onto the stack
     stack.push(value);
     // Peek at the top value and check that it is correct
@@ -76,9 +76,9 @@ public class StackImplementationTests {
 
   @Test
   public void testGrowSizeStack() throws NotAllowedSize {
-    LinkedStack stack = new LinkedStack(5);
-    stack.growSizeStack(2147483645);
-    assertEquals(11, stack.getStackMaximumSize());
+    LinkedStack stack = new LinkedStack(2147483645);
+    stack.growSizeStack(4);
+    assertEquals(214748365, stack.getStackMaximumSize());
   }
 
   @Test
@@ -90,7 +90,7 @@ public class StackImplementationTests {
 
   @Test
   public void testArrayStackSize(){
-    Stack stack = new Stack(5);
+    Stack<Integer> stack = new Stack(0);
     stack.push(1);
     assertEquals(1,stack.getStackSize());
   }
@@ -98,7 +98,7 @@ public class StackImplementationTests {
   @Test
   public void testIsFull() {
 
-    LinkedStack stack = new LinkedStack(5);
+    LinkedStack<Integer> stack = new LinkedStack<Integer>(5);
     stack.push(1);
     /* Test Case 1: Assertion that the stack is not full */
     assertFalse(stack.isFull()); // PASSED TEST
@@ -119,7 +119,7 @@ public class StackImplementationTests {
 
   @Test
   public void testIsEmpty() {
-    LinkedStack stack = new LinkedStack(5);
+    LinkedStack<Integer> stack = new LinkedStack<Integer>(5);
 
     /* Test Case 1: When the stack is empty */
     assertTrue(stack.isEmpty()); // PASSED

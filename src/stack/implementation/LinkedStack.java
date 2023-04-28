@@ -2,12 +2,8 @@ package stack.implementation;
 
 import stack.Node;
 import stack.StackInterface;
-import stack.exceptions.NegativeNumberException;
-import stack.exceptions.NotAllowedSize;
-import stack.exceptions.StackIsAlreadyEmptyException;
-import stack.exceptions.StackIsAlreadyFullException;
+import stack.exceptions.*;
 
-import java.util.NoSuchElementException;
 
 public class LinkedStack<E> implements StackInterface<E> {
 
@@ -64,8 +60,8 @@ public class LinkedStack<E> implements StackInterface<E> {
     if (size > MAX_SIZE_INTEGER) {
       throw new NotAllowedSize(size);
     }
-    if (maxSize + size > MAX_SIZE_INTEGER || maxSize + size < 0) {
-      throw new NotAllowedSize(size);
+    if (maxSize + size < 0) {
+      throw new IntegerOverflowException();
     }
     maxSize += size;
     System.out.println("maximum size of the stack: " + maxSize);
@@ -73,7 +69,6 @@ public class LinkedStack<E> implements StackInterface<E> {
 
   @Override
   public synchronized int getStackSize() {
-    int size = 0;
     Node<E> current = top;
     while (current != null) {
       size++;
@@ -100,7 +95,7 @@ public class LinkedStack<E> implements StackInterface<E> {
   @Override
   public String toString() {
     String result = "";
-    Node current = top;
+    Node<E> current = top;
     while (current != null) {
       result = result + current.toString() + "\n";
       current = current.next;

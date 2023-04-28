@@ -49,7 +49,6 @@ public class Stack<E> implements StackInterface<E> {
   @Override
   public synchronized void growSizeStack(int size) {
     maxSize += size;
-    E[] newStackArray = (E[]) new Object[maxSize];
   }
 
 

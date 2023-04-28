@@ -22,5 +22,7 @@ public class Main {
     System.out.println("Maximum size stack is after growing is: " + stack.getStackMaximumSize());
     System.out.println(stack.getStackSize());
 
+
+
   }
 }
