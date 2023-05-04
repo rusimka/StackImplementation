@@ -25,7 +25,7 @@ public class Main {
     //    System.out.println(stack.getStackSize());
 
     // testing the NodeStack implementation
-    NodeStack nodeStack = new NodeStack(2147483644);
+    NodeStack nodeStack = new NodeStack(0);
     nodeStack.push(1);
     nodeStack.push(2);
     nodeStack.pop();
