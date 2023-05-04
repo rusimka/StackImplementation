@@ -50,7 +50,7 @@ public class NodeStack<E> implements Stack<E> {
     if(size<0){
       throw new NegativeNumberException(size);
     }
-    if(maxSize + size < 0 ){
+    if(size > Integer.MAX_VALUE - maxSize ){
       throw new IntegerOverflowException();
     }
     maxSize = maxSize + size;

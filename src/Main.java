@@ -25,11 +25,11 @@ public class Main {
     //    System.out.println(stack.getStackSize());
 
     // testing the NodeStack implementation
-    NodeStack nodeStack = new NodeStack(0);
+    NodeStack nodeStack = new NodeStack(5);
     nodeStack.push(1);
     nodeStack.push(2);
     nodeStack.pop();
-    nodeStack.grow(5);
+    nodeStack.grow(2147483645);
     System.out.println("Number of elements in the stack: " + nodeStack.getStackSize());
   }
 }
