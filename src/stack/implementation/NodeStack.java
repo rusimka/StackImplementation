@@ -4,12 +4,11 @@ import stack.Node;
 import stack.Stack;
 import stack.exceptions.*;
 
-import java.util.NoSuchElementException;
 
 public class NodeStack<E> implements Stack<E> {
 
-  private Node<E> top;
-  private int maxSize;
+  public Node<E> top;
+  public int maxSize;
 
   public NodeStack(int maxSize) throws NotAllowedSize {
     if (maxSize < 0) {
@@ -44,7 +43,7 @@ public class NodeStack<E> implements Stack<E> {
   @Override
   public synchronized E peek() {
     if (isEmpty()) {
-      throw new StackIsAlreadyFullException();
+      throw new StackIsAlreadyEmptyException();
     }
     return top.getData();
   }
