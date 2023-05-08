@@ -12,7 +12,7 @@ public class NodeStack<E> implements Stack<E> {
 
   public NodeStack(int maxSize)  {
     if (maxSize <= 0) {
-      throw new MaximumSizeSmallerOrEqualToZeroException();
+      throw new stack.exceptions.MaximumSizeSmallerOrEqualToZeroException();
     }
 
     this.top = null;
@@ -48,10 +48,10 @@ public class NodeStack<E> implements Stack<E> {
   @Override
   public void grow(int size)  {
     if(size<0){
-      throw new NegativeNumberException(size);
+      throw new stack.exceptions.NegativeNumberException(size);
     }
     if(size > Integer.MAX_VALUE - maxSize ){
-      throw new IntegerOverflowException();
+      throw new stack.exceptions.IntegerOverflowException();
     }
     maxSize = maxSize + size;
   }
